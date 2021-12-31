@@ -1,0 +1,19 @@
+[package]
+name = "video_to_ascii"
+version = "0.1.0"
+authors = ["Brighton Sikarskie <brighton.sikarskie@tuta.io>"]
+readme = "README.md"
+description = "A simple rust video to ascii converter"
+repository = "https://github.com/bsikar/video_to_ascii"
+license = "MIT"
+edition = "2021"
+
+[dependencies]
+clap = "2.34.0"
+ffmpeg = { version = "0.3.0", features = ["build"] }
+fontdue = "0.6.2"
+image = "0.23.14"
+packer = "0.5.3"
+rayon = "1.5.1"
+termcolor = "1.1.2"
+terminal_size = "0.1.17"
