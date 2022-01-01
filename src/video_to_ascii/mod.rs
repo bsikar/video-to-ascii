@@ -55,7 +55,7 @@ impl<'a> AsciiVideo<'a> {
             filter,
             px,
             total_frames,
-            show_ascii
+            show_ascii,
         }
     }
 

@@ -32,7 +32,9 @@ impl AsciiImage {
                 if show_ascii {
                     stdout.set_color(ColorSpec::new().set_bg(color)).unwrap();
                 } else {
-                    stdout.set_color(ColorSpec::new().set_bg(color).set_fg(color)).unwrap();
+                    stdout
+                        .set_color(ColorSpec::new().set_bg(color).set_fg(color))
+                        .unwrap();
                 }
                 stdout.write_all(ascii.to_string().as_bytes()).unwrap();
             }
@@ -66,7 +68,14 @@ impl AsciiImage {
         self.rasterize(font, px, show_ascii).save(path).unwrap();
     }
 
-    fn get_ascii_as_image(&self, c: char, rgb: Rgb<u8>, font: &Font, px: u32, show_ascii: bool) -> RgbImage {
+    fn get_ascii_as_image(
+        &self,
+        c: char,
+        rgb: Rgb<u8>,
+        font: &Font,
+        px: u32,
+        show_ascii: bool,
+    ) -> RgbImage {
         // this will rasterize each character
         let (metrics, bitmap) = font.rasterize(c, (px - 1) as f32);
         let mut img = RgbImage::from_pixel(px, px, rgb); // background of whole image
