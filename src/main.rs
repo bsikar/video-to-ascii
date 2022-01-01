@@ -51,6 +51,15 @@ fn main() {
                 .value_name("PIXEL_SIZE")
                 .default_value("16"),
         )
+        .arg(
+            Arg::with_name("show_ascii")
+                .help("Should the output show ascii or not")
+                .short("a")
+                .long("show_ascii")
+                .possible_values(&["true", "false"])
+                .value_name("SHOW_ASCII")
+                .default_value("true"),
+        )
         .get_matches();
 
     let width = matches
@@ -66,7 +75,8 @@ fn main() {
         .value_of("pixel_size")
         .map(|x| x.parse::<u32>().expect("failed to parse to u32"))
         .unwrap();
+    let ascii = matches.value_of("show_ascii").unwrap() == "true";
 
-    let mut ascii_video = AsciiVideo::new(input, output, width, height, filter, px);
+    let mut ascii_video = AsciiVideo::new(input, output, width, height, filter, px, ascii);
     ascii_video.output();
 }

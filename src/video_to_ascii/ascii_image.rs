@@ -22,14 +22,18 @@ impl AsciiImage {
         AsciiImage(image)
     }
 
-    pub fn output_to_stdout(&self) {
+    pub fn output_to_stdout(&self, show_ascii: bool) {
         let chars = self.get_ascii();
 
         for row in chars {
             for (ascii, color) in row {
                 let mut stdout = StandardStream::stdout(ColorChoice::Always);
                 let color = Some(termcolor::Color::Rgb(color[0], color[1], color[2]));
-                stdout.set_color(ColorSpec::new().set_bg(color)).unwrap();
+                if show_ascii {
+                    stdout.set_color(ColorSpec::new().set_bg(color)).unwrap();
+                } else {
+                    stdout.set_color(ColorSpec::new().set_bg(color).set_fg(color)).unwrap();
+                }
                 stdout.write_all(ascii.to_string().as_bytes()).unwrap();
             }
             println!();
@@ -56,13 +60,13 @@ impl AsciiImage {
         characters
     }
 
-    pub fn output_to_file(&self, path: String, px: u32) {
+    pub fn output_to_file(&self, path: String, px: u32, show_ascii: bool) {
         let font_bytes = Assets::get("assets/fonts/consolas.ttf").unwrap();
         let font = Font::from_bytes(font_bytes, FontSettings::default()).unwrap();
-        self.rasterize(font, px).save(path).unwrap();
+        self.rasterize(font, px, show_ascii).save(path).unwrap();
     }
 
-    fn get_ascii_as_image(&self, c: char, rgb: Rgb<u8>, font: &Font, px: u32) -> RgbImage {
+    fn get_ascii_as_image(&self, c: char, rgb: Rgb<u8>, font: &Font, px: u32, show_ascii: bool) -> RgbImage {
         // this will rasterize each character
         let (metrics, bitmap) = font.rasterize(c, (px - 1) as f32);
         let mut img = RgbImage::from_pixel(px, px, rgb); // background of whole image
@@ -76,7 +80,7 @@ impl AsciiImage {
             for x in dx..metrics.width + dx {
                 let bitmap_value = bitmap.next().unwrap();
                 let mut rgb = rgb;
-                if bitmap_value != 0 {
+                if bitmap_value != 0 && show_ascii {
                     rgb.invert()
                 }
 
@@ -89,7 +93,7 @@ impl AsciiImage {
         img
     }
 
-    fn rasterize(&self, font: Font, px: u32) -> RgbImage {
+    fn rasterize(&self, font: Font, px: u32, show_ascii: bool) -> RgbImage {
         let mut img = RgbImage::new(self.0.width() * px, self.0.height() * px);
         let ascii = self.get_ascii();
 
@@ -99,7 +103,7 @@ impl AsciiImage {
                 let (c, pixel) = ascii[iy as usize][ix as usize];
                 let mut sub_img = img.sub_image(ix * px, iy * px, px, px);
                 // rasterize character by iterating through each pixel of a character
-                let raster = self.get_ascii_as_image(c, Rgb(pixel), &font, px);
+                let raster = self.get_ascii_as_image(c, Rgb(pixel), &font, px, show_ascii);
 
                 // iter the sub image and place the rasterized character
                 for sy in 0..px {
