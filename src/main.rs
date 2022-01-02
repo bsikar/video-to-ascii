@@ -18,7 +18,9 @@ fn main() {
             Arg::with_name("output")
                 .help("This is the output file, if not specified, stdout is used")
                 .index(2)
-                .value_name("OUTPUT"),
+                .value_name("OUTPUT")
+                .short("o")
+                .long("output"),
         )
         .arg(
             Arg::with_name("width")
@@ -60,6 +62,24 @@ fn main() {
                 .value_name("SHOW_ASCII")
                 .default_value("true"),
         )
+        .arg(
+            Arg::with_name("show_color")
+                .help("Should the output show color or not")
+                .short("c")
+                .long("show_color")
+                .possible_values(&["true", "false"])
+                .value_name("SHOW_COLOR")
+                .default_value("true"),
+        )
+        .arg(
+            Arg::with_name("show_inverted")
+                .help("Should the output's color be inverted or not")
+                .short("i")
+                .long("show_inverted")
+                .possible_values(&["true", "false"])
+                .value_name("SHOW_INVERTED")
+                .default_value("false"),
+        )
         .get_matches();
 
     let width = matches
@@ -75,8 +95,21 @@ fn main() {
         .value_of("pixel_size")
         .map(|x| x.parse::<u32>().expect("failed to parse to u32"))
         .unwrap();
-    let ascii = matches.value_of("show_ascii").unwrap() == "true";
+    let ascii = matches
+        .value_of("show_ascii")
+        .map(|x| x.parse::<bool>().expect("failed to parse to bool"))
+        .unwrap();
+    let color = matches
+        .value_of("show_color")
+        .map(|x| x.parse::<bool>().expect("failed to parse to bool"))
+        .unwrap();
+    let inverted = matches
+        .value_of("show_inverted")
+        .map(|x| x.parse::<bool>().expect("failed to parese to bool"))
+        .unwrap();
 
-    let mut ascii_video = AsciiVideo::new(input, output, width, height, filter, px, ascii);
+    let mut ascii_video = AsciiVideo::new(
+        input, output, width, height, filter, px, ascii, color, inverted,
+    );
     ascii_video.output();
 }

@@ -21,6 +21,8 @@ pub struct AsciiVideo<'a> {
     px: u32,
     total_frames: usize,
     show_ascii: bool,
+    show_color: bool,
+    show_inverted: bool,
 }
 
 impl<'a> AsciiVideo<'a> {
@@ -32,6 +34,8 @@ impl<'a> AsciiVideo<'a> {
         filter: Option<&str>,
         px: u32,
         show_ascii: bool,
+        show_color: bool,
+        show_inverted: bool,
     ) -> Self {
         let mut video = VideoStream::new(input).unwrap();
         let total_frames = video.iter().fold(0, |acc, _| acc + 1);
@@ -56,6 +60,8 @@ impl<'a> AsciiVideo<'a> {
             px,
             total_frames,
             show_ascii,
+            show_color,
+            show_inverted,
         }
     }
 
@@ -68,7 +74,9 @@ impl<'a> AsciiVideo<'a> {
     }
 
     fn file_output(&mut self) {
-        let dir = ".video_to_ascii_tmp";
+        let dir = format!(".tmp_video_to_ascii-{}", std::process::id());
+        let dir = dir.as_str();
+
         let prefix = self.output.unwrap().split('.').next().unwrap();
         if !std::path::Path::new(dir).exists() {
             std::fs::create_dir(dir).unwrap();
@@ -86,11 +94,13 @@ impl<'a> AsciiVideo<'a> {
             print!("{} / {}\r", cnt, self.total_frames);
             std::io::stdout().flush().unwrap();
 
-            if self.show_ascii {
-                AsciiImage::new(img).output_to_file(path, self.px, self.show_ascii);
-            } else {
-                img.save(path).unwrap();
-            }
+            AsciiImage::new(img).output_to_file(
+                path,
+                self.px,
+                self.show_ascii,
+                self.show_color,
+                self.show_inverted,
+            );
         }
         // save all files to mp4 and remove each file one added to the mp4
         // TODO make this work without Command
@@ -117,7 +127,7 @@ impl<'a> AsciiVideo<'a> {
             };
 
             let ascii_image = AsciiImage::new(img);
-            ascii_image.output_to_stdout(self.show_ascii);
+            ascii_image.output_to_stdout(self.show_ascii, self.show_color, self.show_inverted);
             print!("\x1B[1;1H"); // move curser
         }
     }
