@@ -1,2 +1,2 @@
-# video_to_ascii
+# video-to-ascii
 A simple rust video to ascii converter
