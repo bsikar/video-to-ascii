@@ -1,7 +1,7 @@
 [package]
 name = "video_to_ascii"
 version = "0.1.0"
-authors = ["Brighton Sikarskie <brighton.sikarskie@tuta.io>"]
+authors = ["Brighton Sikarskie <bsikar@tuta.io>"]
 readme = "README.md"
 description = "A simple rust video to ascii converter"
 repository = "https://github.com/bsikar/video_to_ascii"
