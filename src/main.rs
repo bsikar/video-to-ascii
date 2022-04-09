@@ -11,15 +11,16 @@ fn main() {
             Arg::with_name("input")
                 .help("This is the video you are converting to ascii")
                 .required(true)
-                .index(1)
+                .short("i")
+                .long("input")
                 .value_name("INPUT"),
         )
         .arg(
             Arg::with_name("output")
                 .help("This is the output file, if not specified, stdout is used")
-                .index(2)
                 .value_name("OUTPUT")
                 .short("o")
+                .long("output")
                 .long("output"),
         )
         .arg(
@@ -74,7 +75,7 @@ fn main() {
         .arg(
             Arg::with_name("show_inverted")
                 .help("Should the output's color be inverted or not")
-                .short("i")
+                .short("x")
                 .long("show_inverted")
                 .possible_values(&["true", "false"])
                 .value_name("SHOW_INVERTED")
