@@ -25,14 +25,14 @@ fn main() {
         )
         .arg(
             Arg::with_name("width")
-                .help("The width of the output image")
+                .help("The width of the output image\nIf no width is given then it will scale the width based off the specified height, but if no height is specified then the input video's dimensions will be used")
                 .short("w")
                 .long("width")
                 .value_name("WIDTH"),
         )
         .arg(
             Arg::with_name("height")
-                .help("The height of the output image")
+                .help("The height of the output image\nIf no height is given then it will scale the height based off the specified width, but if no width is specified then the input video's dimensions will be used")
                 .short("h")
                 .long("height")
                 .value_name("HEIGHT"),
