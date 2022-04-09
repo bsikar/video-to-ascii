@@ -54,8 +54,12 @@ If the video is played in the terminal its frame rate is going to be based off h
 
 ### terminal
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -a true -x true -c true
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov
 ```
+
+https://user-images.githubusercontent.com/65072072/162585904-2ae5d064-58cd-41cb-9162-198100f9668e.mov
+
+
 
 ### file
 
@@ -66,14 +70,20 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii_inverted_colo
 
 
 
+
+
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii_inverted.mov -h 100 -a true -x true -c false
 ```
 
 
+
+
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii_color.mov -h 100 -a true -x false -c true
 ```
+
+
 
 
 
@@ -83,9 +93,15 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii.mov -h 100 -a
 
 
 
+
+
+
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o inverted_color.mov -h 100 -a false -x true --c true
 ```
+
+
+
 
 
 
@@ -94,9 +110,15 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o inverted.mov -h 100
 ```
 
 
+
+
+
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o color.mov -h 100 -a false -x false --c true
 ```
+
+
+
 
 
 ```sh
