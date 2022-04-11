@@ -53,7 +53,7 @@ OPTIONS:
 Be careful with you dimentions because you can make come VERY large frames, e.g this [20480x11520 frame](https://media.githubusercontent.com/media/bsikar/video-to-ascii/main/outputs/frame1.png)
  that I made by mistake. If your compiliation times are off the charts your dimentions might be too high, this one frame took me over an hour on my computer.
 
-This program works by taking an input video such as [assets/videos/big_buck_bunny_720p_1mb.mov](https://github.com/bsikar/video-to-ascii/blob/main/assets/videos/big_buck_bunny_720p_1mb.mov) then applying flags on it
+This program works by taking an input video such as [assets/videos/big_buck_bunny_720p_1mb.mp4](https://github.com/bsikar/video-to-ascii/blob/main/assets/videos/big_buck_bunny_720p_1mb.mp4) then applying flags on it
 
 
 ## input video
@@ -69,53 +69,53 @@ If the video is played in the terminal its frame rate is going to be based off h
 
 ### terminal
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -a true -x true -c true
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -a true -x true -c true
 ```
 
 ### file
 
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii_inverted_color.mov -h 100 -a true -x true -c true
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o ascii_inverted_color.mp4 -h 100 -a true -x true -c true
 ```
 
 
 
 
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii_inverted.mov -h 100 -a true -x true -c false
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o ascii_inverted.mp4 -h 100 -a true -x true -c false
 ```
 
 
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii_color.mov -h 100 -a true -x false -c true
-```
-
-
-
-```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii.mov -h 100 -a true -x false -c false
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o ascii_color.mp4 -h 100 -a true -x false -c true
 ```
 
 
 
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o inverted_color.mov -h 100 -a false -x true --c true
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o ascii.mp4 -h 100 -a true -x false -c false
 ```
 
 
 
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o inverted.mov -h 100 -a false -x true --c false
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o inverted_color.mp4 -h 100 -a false -x true --c true
+```
+
+
+
+```sh
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o inverted.mp4 -h 100 -a false -x true --c false
 ```
 
 
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o color.mov -h 100 -a false -x false --c true
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o color.mp4 -h 100 -a false -x false --c true
 ```
 
 
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o none.mov -h 100 -a false -x false -c false
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o none.mp4 -h 100 -a false -x false -c false
 ```
 
 
