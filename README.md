@@ -2,37 +2,52 @@
 A simple rust video to ascii converter
 
 ```
-video_to_ascii 0.1.0
+video-to-ascii 0.1.0
 Brighton Sikarskie <bsikar@tuta.io>
 A simple rust video to ascii converter
 
 USAGE:
-    video_to_ascii [OPTIONS] --input <INPUT>
-
-FLAGS:
-        --help       Prints help information
-    -V, --version    Prints version information
+    video-to-ascii [OPTIONS] --input <INPUT>
 
 OPTIONS:
-    -f, --filter <FILTER>                  The filter used to resize the image [default: nearest]  [possible values:
-                                           nearest, triangle, catmullrom, gaussian, lanczos3]
-    -h, --height <HEIGHT>                  The height of the output image
-                                           If no height is given then it will scale the height based off the specified
-                                           width, but if no width is specified then the input video's dimensions will be
-                                           used
-    -i, --input <INPUT>                    This is the video you are converting to ascii
-    -o, --output <OUTPUT>                  This is the output file, if not specified, stdout is used
-    -p, --pixel_size <PIXEL_SIZE>          The pixel size used to resize the image [default: 16]
-    -a, --show_ascii <SHOW_ASCII>          Should the output show ascii or not [default: true]  [possible values: true,
-                                           false]
-    -c, --show_color <SHOW_COLOR>          Should the output show color or not [default: true]  [possible values: true,
-                                           false]
-    -x, --show_inverted <SHOW_INVERTED>    Should the output's color be inverted or not [default: false]  [possible
-                                           values: true, false]
-    -w, --width <WIDTH>                    The width of the output image
-                                           If no width is given then it will scale the width based off the specified
-                                           height, but if no height is specified then the input video's dimensions will
-                                           be used
+    -a, --show_ascii <SHOW_ASCII>
+            Should the output show ascii or not [default: true] [possible values: true, false]
+
+    -c, --show_color <SHOW_COLOR>
+            Should the output show color or not [default: true] [possible values: true, false]
+
+    -f, --filter <FILTER>
+            The filter used to resize the image [default: nearest] [possible values: nearest,
+            triangle, catmullrom, gaussian, lanczos3]
+
+    -h, --height <HEIGHT>
+            The height of the output image
+            If no height is given then it will scale the height based off the specified width, but
+            if no width is specified then the input video's dimensions will be used
+
+        --help
+            Print help information
+
+    -i, --input <INPUT>
+            This is the video you are converting to ascii
+
+    -o, --output <OUTPUT>
+            This is the output file, if not specified, stdout is used
+
+    -p, --pixel_size <PIXEL_SIZE>
+            The pixel size used to resize the image [default: 16]
+
+    -V, --version
+            Print version information
+
+    -w, --width <WIDTH>
+            The width of the output image
+            If no width is given then it will scale the width based off the specified height, but if
+            no height is specified then the input video's dimensions will be used
+
+    -x, --show_inverted <SHOW_INVERTED>
+            Should the output's color be inverted or not [default: false] [possible values: true,
+            false]
 ```
 
 Be careful with you dimentions because you can make come VERY large frames, e.g this [20480x11520 frame](https://media.githubusercontent.com/media/bsikar/video-to-ascii/main/outputs/frame1.png)
@@ -54,12 +69,8 @@ If the video is played in the terminal its frame rate is going to be based off h
 
 ### terminal
 ```sh
-cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov
+cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -a true -x true -c true
 ```
-
-https://user-images.githubusercontent.com/65072072/162585904-2ae5d064-58cd-41cb-9162-198100f9668e.mov
-
-
 
 ### file
 
@@ -70,20 +81,14 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii_inverted_colo
 
 
 
-
-
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii_inverted.mov -h 100 -a true -x true -c false
 ```
 
 
-
-
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii_color.mov -h 100 -a true -x false -c true
 ```
-
-
 
 
 
@@ -93,15 +98,9 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o ascii.mov -h 100 -a
 
 
 
-
-
-
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o inverted_color.mov -h 100 -a false -x true --c true
 ```
-
-
-
 
 
 
@@ -110,15 +109,9 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o inverted.mov -h 100
 ```
 
 
-
-
-
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mov -o color.mov -h 100 -a false -x false --c true
 ```
-
-
-
 
 
 ```sh

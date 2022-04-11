@@ -1,13 +1,10 @@
+use crate::Flag;
 use fontdue::{Font, FontSettings};
 use image::{GenericImage, Pixel, Rgb, RgbImage};
-use packer::Packer;
 use std::io::Write;
 use termcolor::{ColorChoice, ColorSpec, StandardStream, WriteColor};
 
-#[derive(Packer)]
-#[packer(source = "assets/fonts/consolas.ttf")]
-struct Assets;
-
+static FONT_FILE: &[u8] = include_bytes!("../../assets/fonts/consolas.ttf");
 const ASCII_TABLE: [char; 70] = [
     '$', '@', 'B', '%', '8', '&', 'W', 'M', '#', '*', 'o', 'a', 'h', 'k', 'b', 'd', 'p', 'q', 'w',
     'm', 'Z', 'O', '0', 'Q', 'L', 'C', 'J', 'U', 'Y', 'X', 'z', 'c', 'v', 'u', 'n', 'x', 'r', 'j',
@@ -22,8 +19,12 @@ impl AsciiImage {
         AsciiImage(image)
     }
 
-    pub fn output_to_stdout(&self, show_ascii: bool, show_color: bool, show_inverted: bool) {
+    pub fn output_to_stdout(&self, flags: Vec<Flag>) {
         let chars = self.get_ascii();
+
+        let show_inverted = flags.contains(&Flag::Invert);
+        let show_color = flags.contains(&Flag::Color);
+        let show_ascii = flags.contains(&Flag::Ascii);
 
         for row in chars {
             for (ascii, color) in row {
@@ -69,19 +70,9 @@ impl AsciiImage {
         characters
     }
 
-    pub fn output_to_file(
-        &self,
-        path: String,
-        px: u32,
-        show_ascii: bool,
-        show_color: bool,
-        show_inverted: bool,
-    ) {
-        let font_bytes = Assets::get("assets/fonts/consolas.ttf").unwrap();
-        let font = Font::from_bytes(font_bytes, FontSettings::default()).unwrap();
-        self.rasterize(font, px, show_ascii, show_color, show_inverted)
-            .save(path)
-            .unwrap();
+    pub fn output_to_file(&self, path: String, px: u32, flags: Vec<Flag>) {
+        let font = Font::from_bytes(FONT_FILE, FontSettings::default()).unwrap();
+        self.rasterize(font, px, flags).save(path).unwrap();
     }
 
     fn get_ascii_as_image(
@@ -90,10 +81,12 @@ impl AsciiImage {
         rgb: Rgb<u8>,
         font: &Font,
         px: u32,
-        show_ascii: bool,
-        show_color: bool,
-        show_inverted: bool,
+        flags: Vec<Flag>,
     ) -> RgbImage {
+        let show_inverted = flags.contains(&Flag::Invert);
+        let show_color = flags.contains(&Flag::Color);
+        let show_ascii = flags.contains(&Flag::Ascii);
+
         // this will rasterize each character
         let mut rgb = rgb;
         if !show_color {
@@ -129,14 +122,7 @@ impl AsciiImage {
         img
     }
 
-    fn rasterize(
-        &self,
-        font: Font,
-        px: u32,
-        show_ascii: bool,
-        show_color: bool,
-        show_inverted: bool,
-    ) -> RgbImage {
+    fn rasterize(&self, font: Font, px: u32, flags: Vec<Flag>) -> RgbImage {
         let mut img = RgbImage::new(self.0.width() * px, self.0.height() * px);
         let ascii = self.get_ascii();
 
@@ -146,15 +132,7 @@ impl AsciiImage {
                 let (c, pixel) = ascii[iy as usize][ix as usize];
                 let mut sub_img = img.sub_image(ix * px, iy * px, px, px);
                 // rasterize character by iterating through each pixel of a character
-                let raster = self.get_ascii_as_image(
-                    c,
-                    Rgb(pixel),
-                    &font,
-                    px,
-                    show_ascii,
-                    show_color,
-                    show_inverted,
-                );
+                let raster = self.get_ascii_as_image(c, Rgb(pixel), &font, px, flags.clone());
 
                 // iter the sub image and place the rasterized character
                 for sy in 0..px {
