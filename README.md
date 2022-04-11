@@ -80,10 +80,17 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o ascii_inverted_colo
 
 
 
+https://user-images.githubusercontent.com/65072072/162687128-09ed07f6-2ef6-4ed9-b86d-010db4ee83ed.mov
+
+
 
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o ascii_inverted.mp4 -h 100 -a true -x true -c false
 ```
+
+
+https://user-images.githubusercontent.com/65072072/162688266-2557589d-999d-496e-bf8c-b29adbc15643.mov
+
 
 
 ```sh
@@ -91,10 +98,18 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o ascii_color.mp4 -h 
 ```
 
 
+https://user-images.githubusercontent.com/65072072/162688374-b1a58383-827a-4c7b-b085-d7c369fb7498.mov
+
+
+
 
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o ascii.mp4 -h 100 -a true -x false -c false
 ```
+
+
+https://user-images.githubusercontent.com/65072072/162688385-d4d2936b-bccc-47fe-9638-a42fab7289fd.mov
+
 
 
 
@@ -104,9 +119,17 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o inverted_color.mp4 
 
 
 
+https://user-images.githubusercontent.com/65072072/162688410-37018932-08f3-49a8-be7d-59ee66fa2fb4.mov
+
+
+
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o inverted.mp4 -h 100 -a false -x true --c false
 ```
+
+
+https://user-images.githubusercontent.com/65072072/162687595-17c19185-5eef-45db-b1ae-95a14a35789a.mov
+
 
 
 ```sh
@@ -114,8 +137,16 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o color.mp4 -h 100 -a
 ```
 
 
+https://user-images.githubusercontent.com/65072072/162688432-57d8bd8d-4a2c-4f75-99cc-92be58c0e648.mov
+
+
+
 ```sh
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o none.mp4 -h 100 -a false -x false -c false
 ```
+
+
+https://user-images.githubusercontent.com/65072072/162688510-db94c4c7-7e09-45e2-98cd-0b689b1d46c2.mov
+
 
 
