@@ -72,6 +72,8 @@ If the video is played in the terminal its frame rate is going to be based off h
 cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -a true -x true -c true
 ```
 
+https://user-images.githubusercontent.com/65072072/162585904-2ae5d064-58cd-41cb-9162-198100f9668e.mov
+
 ### file
 
 ```sh
