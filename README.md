@@ -150,5 +150,10 @@ cargo run -- -i assets/videos/big_buck_bunny_720p_1mb.mp4 -o none.mp4 -h 100 -a 
 
 https://user-images.githubusercontent.com/65072072/162688510-db94c4c7-7e09-45e2-98cd-0b689b1d46c2.mov
 
+## Contributing
 
+Contributions to the project are welcome. If you find a bug or want to add a feature, feel free to open an issue or submit a pull request.
 
+## License
+
+The code in this project is licensed under the MIT License. See the LICENSE file for details.
